@@ -1,0 +1,98 @@
+#container {
+  margin: 10px;
+  height: 800px;
+  width: 800px;
+  border: 2px;
+  display: flex;
+  justify-content: center;
+  background-image: url('https://www.belloflostsouls.net/wp-content/uploads/2014/04/Lustria-temple.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+
+
+
+.ballsSet1 {
+  display: inline-block;
+  /* background: red; */
+  /* border-radius: 50%; */
+  height: 100px;
+  width: 100px;
+  margin: 0;
+}
+
+.ballsSet2 {
+  display: inline-block;
+  /* background: red; */
+  /* border-radius: 50%; */
+  height: 100px;
+  width: 100px;
+  margin: 0;
+}
+
+.ballsSet3 {
+  display: inline-block;
+  /* background: red; */
+  /* border-radius: 50%; */
+  height: 100px;
+  width: 100px;
+  margin: 0;
+}
+
+.ballsSet4 {
+  display: inline-block;
+  /* background: red; */
+  /* border-radius: 50%; */
+  height: 100px;
+  width: 100px;
+  margin: 0;
+}
+
+.ballsSet5 {
+  display: inline-block;
+  /* background: red; */
+  /* border-radius: 50%; */
+  height: 100px;
+  width: 100px;
+  margin: 0;
+}
+
+/* @keyframes shoot {
+  from {
+    left: 350px;
+    top: 400px;
+  }
+
+  to {
+    left: 300px;
+    top: 0px;
+  }
+} */
+
+
+#shootBall {
+  display: inline-block;
+  /* background: red; */
+  /* border-radius: 50%; */
+  height: 100px;
+  width: 100px;
+  margin: 0;
+  position: absolute;
+  /* left: 350px;
+  top: 400px; */
+
+  /* animation-name: shoot;
+  animation-duration: 4s;
+  animation-iteration-count: infinite; */
+
+}
+
+/* #container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+
+} */
