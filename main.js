@@ -1,159 +1,181 @@
-var randomColor1 = '#'+ ('000000' + Math.floor(Math.random()*16777215).toString(16)).slice(-6);
-var randomColor2 = '#'+ ('000000' + Math.floor(Math.random()*16777113).toString(16)).slice(-6);
-var randomColor3 = '#'+ ('000000' + Math.floor(Math.random()*16777123).toString(16)).slice(-6);
+const $container = $("#container")
+const $shootBall = $('#shootBall')
 
-//create new rows of rect every 1 min
-var myVar = setInterval(createNewRow, 10000)
+let color, randomColor1, randomColor2, randomColor3
+let newRowInterval
 
-function createNewRow() {
-  $(".row").prepend(
-  `<div class = "ballsSet1" ></div>
-  <div class = "ballsSet2" ></div>
-  <div class = "ballsSet3" ></div>
-  <div class = "ballsSet4" ></div>
-  <div class = "ballsSet5" ></div>`)
+// Utility
+const chooseColor = () => (color[Math.floor(Math.random() * color.length)])
+const createNewRow = () => {
+  const elem =  `
+    <div class="ballsSet1 ball"></div>
+    <div class="ballsSet2 ball"></div>
+    <div class="ballsSet3 ball"></div>
+  `
+  $container.prepend(elem)
 
-  $(".ballsSet1").css('background-color', randomColor2)
-  $(".ballsSet2").css('background-color', randomColor1)
-  $(".ballsSet3").css('background-color', randomColor3)
-  $(".ballsSet4").css('background-color', randomColor2)
-  $(".ballsSet5").css('background-color', randomColor1)
-
+  $(".ballsSet1").css('background-color', chooseColor())
+  $(".ballsSet2").css('background-color', chooseColor())
+  $(".ballsSet3").css('background-color', chooseColor())
 }
 
-$(".ballsSet1").css('background-color', randomColor1)
-$(".ballsSet2").css('background-color', randomColor2)
-$(".ballsSet3").css('background-color', randomColor3)
-$(".ballsSet4").css('background-color', randomColor1)
-$(".ballsSet5").css('background-color', randomColor2)
+// Collision Detection
+const collisionNew = function (rect1, rect2) {
+  let r1x = rect1.offset().left
+  let r1y = rect1.offset().top
+  let r1w = rect1.width()
+  let r1h = rect1.height()
+  let r2x = rect2.offset().left
+  let r2y = rect2.offset().top
+  let r2w = rect2.width()
+  let r2h = rect2.height()
 
-
-const chooseColor = function () {
-  let color = [randomColor1, randomColor2, randomColor3]
-  colorToChoose = color[Math.floor(Math.random() * color.length)]
-  return colorToChoose
+  if (r1x < (r2x +r2w) &&
+      (r1x + r1w) > r2x &&
+      r1y < (r2y + r2h) &&
+      (r1y + r1h) > r2y) {
+    return true
+  }
 }
 
-$("#shootBall").css('background-color', chooseColor())
 
-$("#shootBall").css({left: 350, top: 400})
-
-
-
-
-
+const resetShooting = () => {
+  $shootBall
+    .css({left: 100, top: 350})
+    .css('background-color', chooseColor())
+}
 
 //click to shoot, collision, reset
-const clickShootEvent = function () {
-$("#shootBall").click(function() {
-  $("#shootBall").animate({
-    top: "-=350"
+const clickShootEvent = () => {
+  $shootBall.click(() => {
+    $shootBall.animate({
+      left: "+=350"
+    }, {
+      duration: 1000,
+      step: () => {
+        if (collisionNew($shootBall, $(".ballsSet1"))) {
+          if ($shootBall.css('background-color') === $(".ballsSet1").css('background-color')) {
+            resetShooting()
+            // $(".ballsSet1").hide()
+            createNewRow()
+            scoreAdd()
+          }
+        }
 
-  }, 1000, function() {
+        if (collisionNew($shootBall, $(".ballsSet2"))) {
+          if ($shootBall.css('background-color') === $(".ballsSet2").css('background-color')) {
+            resetShooting()
+            // $(".ballsSet2").hide()
+            createNewRow()
+            scoreAdd()
+          }
+        }
 
-const afterHit = function () {
-  if (collision($("#shootBall"), $(".ballsSet1"))) {
-    if ($("#shootBall").css('background-color') === $(".ballsSet1").css('background-color')) {
-      $("#shootBall").hide()
-      $(".ballsSet1").hide()
-      return resetShooting()
-    }
-  }
+        if (collisionNew($shootBall, $(".ballsSet3"))) {
+          if ($shootBall.css('background-color') === $(".ballsSet3").css('background-color')) {
+            resetShooting()
+            // $(".ballsSet3").hide()
+            createNewRow()
+            scoreAdd()
+          }
+        }
 
-  if (collision($("#shootBall"), $(".ballsSet2"))) {
-    if ($("#shootBall").css('background-color') === $(".ballsSet2").css('background-color')) {
-      $("#shootBall").hide()
-      $(".ballsSet2").hide()
-      return resetShooting()
-    }
-  }
-
-  if (collision($("#shootBall"), $(".ballsSet3"))) {
-    if ($("#shootBall").css('background-color') === $(".ballsSet3").css('background-color')) {
-      $("#shootBall").hide()
-      $(".ballsSet3").hide()
-      return resetShooting()
-    }
-  }
-
-  if (collision($("#shootBall"), $(".ballsSet4"))) {
-    if ($("#shootBall").css('background-color') === $(".ballsSet4").css('background-color')) {
-      $("#shootBall").hide()
-      $(".ballsSet4").hide()
-      return resetShooting()
-    }
-  }
-
-  if (collision($("#shootBall"), $(".ballsSet5"))) {
-    if ($("#shootBall").css('background-color') === $(".ballsSet5").css('background-color')) {
-      $("#shootBall").hide()
-      $(".ballsSet5").hide()
-      return resetShooting()
-    }
-  }
-}
-
-afterHit()
-
-function resetShooting() {
-  $("body").prepend(`<div id = "shootBall"></div>`)
-  $("#shootBall").css('background-color', chooseColor())
-  $("#shootBall").css({left: 350, top: 400})
-  return clickShootEvent()
-}
-
-// function scoreAdd() {
-//   let t = 0
-//   if ($("#shootBall").hide()) {
-//     newT = t + 5
-//   }
-//   $("#score").html(newT)
-// }
-
-});
-
-});
+      },
+      complete: () => {
+        resetShooting()
+      }
+    })
+  })
 }
 clickShootEvent()
 
+const randomColor = () => (`#${('000000' + Math.floor(Math.random() * 16777215).toString(16)).slice(-6)}`)
 //arrow keys to move the shooting rectangle
-$(document).keydown(function (e) {
-  switch (e.which) {
+const handleArrowKeys = (e) => {
+  switch (e.keyCode) {
     case 37:
-      $("#shootBall").finish().animate({left:"-=10"})
+      $shootBall.finish().animate({left:"-=10"}, 170, 'linear')
       break;
 
     case 38:
-      $("#shootBall").finish().animate({top:"-=10"})
+      $shootBall.finish().animate({top:"-=10"}, 170, 'linear')
       break;
 
     case 39:
-      $("#shootBall").finish().animate({left:"+=10"})
+      $shootBall.finish().animate({left:"+=10"}, 170, 'linear')
       break;
 
     case 40:
-      $("#shootBall").finish().animate({top:"+=10"})
+      $shootBall.finish().animate({top:"+=10"}, 170, 'linear')
       break;
-
   }
-})
+}
 
+const init = () => {
+  randomColor1 = randomColor()
+  randomColor2 = randomColor()
+  randomColor3 = randomColor()
+  color = [randomColor1, randomColor2, randomColor3]
 
-//collision detection
-function collision($div1, $div2) {
-        var x1 = $div1.offset().left;
-        var y1 = $div1.offset().top;
-        var h1 = $div1.height(true);
-        var w1 = $div1.width(true);
-        var b1 = y1 + h1;
-        var r1 = x1 + w1;
-        var x2 = $div2.offset().left;
-        var y2 = $div2.offset().top;
-        var h2 = $div2.height(true);
-        var w2 = $div2.width(true);
-        var b2 = y2 + h2;
-        var r2 = x2 + w2;
+  $shootBall.css('background-color', chooseColor())
+  $shootBall.css({left: 100, top: 350})
 
-        if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
-        return true;
-      }
+  $(".ballsSet1").css('background-color', randomColor1)
+  $(".ballsSet2").css('background-color', randomColor2)
+  $(".ballsSet3").css('background-color', randomColor3)
+
+  $(document).keydown(handleArrowKeys)
+
+  $("#score").text("0")
+
+  $("#time").text("0")
+
+  //create new rows of rect every 1 min
+  // newRowInterval = setInterval(createNewRow, 5000)
+}
+
+init()
+
+const scoreAdd = () =>{
+  let i= Number($("#score").text()) + 5
+  return $("#score").text(i)
+}
+
+const scoreDeduct = () =>{
+  let iMinus = Number($("#score").text()) - 5
+  return $("#score").text(iMinus)
+}
+
+//
+let elemArray= [$(".ballsSet1"), $(".ballsSet2"), $(".ballsSet3")]
+
+let elemArrayRandom =  elemArray[Math.floor(Math.random() * color.length)]
+
+const removeElem = function () {
+  elemArrayRandom.hide()
+}
+removeElemInterval = setInterval(removeElem, 10000)
+scoreDeductInterval = setInterval(scoreDeduct, 20000)
+
+//
+const LoseAndWin = function () {
+  if (Number($("#score").text()) <= 100) {
+    // $("#message").append(`<h3>Virus Lose. Human Win. Restart the Spread</h3>`)
+    $("#game-over").css("display", "block")
+    return $("#time").text("-1")
+  } else {
+    // $("#message").append(`<h3>You successfully contaminated the entire world.<h3>`)
+    $("#you-win").css("display", "block")
+    return $("#time").text("-1")
+  }
+}
+
+countingLose = setInterval(LoseAndWin, 60000)
+
+//
+const Timer = () =>{
+  let t = Number($("#time").text()) + 1
+  return $("#time").text(t)
+}
+
+countingTime = setInterval(Timer, 1000)
