@@ -1,98 +1,90 @@
-#container {
-  margin: 10px;
-  height: 800px;
-  width: 800px;
-  border: 2px;
+body {
+  margin: 0;
+  background-color: rgb(138, 138, 138);
+}
+
+/* body::before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.08;
+  background-image: url("https://i2.wp.com/nen.press/wp-content/uploads/2020/01/JAN20-coronavirus.jpg?resize=825%2C510&ssl=1");
+} */
+
+
+#header {
+  text-align: center;
+  background-image: linear-gradient(to right, black, red, black);
+  margin: 0px;
+}
+
+#message {
+  text-align: center;
+  font-style: oblique;
+}
+
+#instructions {
+  text-align: center;
   display: flex;
+  justify-content: space-around;
+}
+
+#container {
+  position: relative;
+  margin: auto;
+  height: 1000px;
+  width: 1000px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
-  background-image: url('https://www.belloflostsouls.net/wp-content/uploads/2014/04/Lustria-temple.jpg');
+  align-content: flex-start;
+  align-items: flex-start;
+  background-image: url('http://www.cartedumonde.net/carte-du-monde/monde/grand/carte-planisphere-vierge.jpg');
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
 }
-
-
-
-
-.ballsSet1 {
-  display: inline-block;
-  /* background: red; */
-  /* border-radius: 50%; */
-  height: 100px;
-  width: 100px;
-  margin: 0;
-}
-
-.ballsSet2 {
-  display: inline-block;
-  /* background: red; */
-  /* border-radius: 50%; */
-  height: 100px;
-  width: 100px;
-  margin: 0;
-}
-
-.ballsSet3 {
-  display: inline-block;
-  /* background: red; */
-  /* border-radius: 50%; */
-  height: 100px;
-  width: 100px;
-  margin: 0;
-}
-
-.ballsSet4 {
-  display: inline-block;
-  /* background: red; */
-  /* border-radius: 50%; */
-  height: 100px;
-  width: 100px;
-  margin: 0;
-}
-
-.ballsSet5 {
-  display: inline-block;
-  /* background: red; */
-  /* border-radius: 50%; */
-  height: 100px;
-  width: 100px;
-  margin: 0;
-}
-
-/* @keyframes shoot {
-  from {
-    left: 350px;
-    top: 400px;
-  }
-
-  to {
-    left: 300px;
-    top: 0px;
-  }
-} */
-
 
 #shootBall {
-  display: inline-block;
-  /* background: red; */
-  /* border-radius: 50%; */
+  position: absolute;
   height: 100px;
   width: 100px;
-  margin: 0;
-  position: absolute;
-  /* left: 350px;
-  top: 400px; */
-
-  /* animation-name: shoot;
-  animation-duration: 4s;
-  animation-iteration-count: infinite; */
-
 }
 
-/* #container {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
+.ball {
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+}
 
+#game-over {
+  display: none;
+  position: absolute;
+  top: 400px;
+  left: 700px;
+  background: #000000;
+  color: white;
+  padding: 20px 50px;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 20%);
+  border-radius: 10px;
+  text-align: center;
+}
 
-} */
+#you-win {
+  display: none;
+  position: absolute;
+  top: 400px;
+  left: 700px;
+  background: #000000;
+  color: white;
+  padding: 20px 50px;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 20%);
+  border-radius: 10px;
+  text-align: center;
+}
