@@ -13,25 +13,29 @@
   <script src="main.js" defer></script>
 </head>
 <body>
-
-<div id="container">
-  <div class ="row">
-    <div class = "ballsSet1"></div>
-    <!-- <div class = "ballsSet1"></div> -->
-    <div class = "ballsSet2"></div>
-    <!-- <div class = "ballsSet2"></div> -->
-    <div class = "ballsSet3"></div>
-    <!-- <div class = "ballsSet3"></div> -->
-    <div class = "ballsSet4"></div>
-    <!-- <div class = "ballsSet4"></div> -->
-    <div class = "ballsSet5"></div>
-    <!-- <div class = "ballsSet5"></div> -->
+  <div id="header">
+    <h1>☣ Spread the Virus ☣</h1>
   </div>
-    <div id = "shootBall"></div>
-    <div class = "refillBall"></div>
-
-    <div id = "scoreCountContainer"><p>Score :<span id= "score"></span></p></div>
-</div>
-
+  <div id="message"></div>
+  <div id="instructions">
+    <h2>Score: <span id= "score"></span></h2>
+    <h2><span id="time"></span>Days</h2>
+  </div>
+  <div id="shootBall"></div>
+  <div id="container">
+    <div class="ballsSet1 ball"></div>
+    <div class="ballsSet2 ball"></div>
+    <div class="ballsSet3 ball"></div>
+  </div>
+  <div id="game-over" >
+    <h1>You Failed</h1>
+    <h2>Human successfully save the world.</h2>
+    <button class="btn" onclick="window.location.reload()">Restart</button>
+  </div>
+    <div id="you-win" >
+    <h1>Virus Wins</h1>
+    <h2>Now the entire world is contaminated.</h2>
+    <button class="btn" onclick="window.location.reload()">Restart</button>
+  </div>
 </body>
 </html>
